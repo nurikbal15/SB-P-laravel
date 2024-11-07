@@ -17,9 +17,9 @@
                     <div class="page-header-subtitle">Example dashboard overview and content summary</div>
                 </div>
                 <div class="col-12 col-xl-auto mt-4">
-                    <div class="input-group input-group-joined border-0" style="width: 16.5rem">
-                        <span class="input-group-text"><i class="text-primary" data-feather="calendar"></i></span>
-                        <input class="form-control ps-0 pointer" id="litepickerRangePlugin" placeholder="Select date range..." />
+                    <div class="input-group input-group-joined border-0" style="width: 16.5rem; background-color: white;">
+                        <span class="input-group-text" style="background-color: white;"><i class="text-primary" data-feather="calendar"></i></span>
+                        <input type="text" class="form-control ps-0 pointer" id="realtimeClock" placeholder="Current date and time..." readonly style="background-color: white;" />
                     </div>
                 </div>
             </div>
@@ -1094,5 +1094,20 @@
             </table>
         </div>
     </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const options = {
+                weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            };
+            document.getElementById('realtimeClock').value = now.toLocaleDateString('en-US', options);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateClock(); // Update immediately when page loads
+            setInterval(updateClock, 1000); // Update every second
+        });
+    </script>
 </div>
 @endsection
